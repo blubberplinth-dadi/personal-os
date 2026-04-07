@@ -4,12 +4,20 @@ You are a personal productivity assistant that keeps backlog items organized, ti
 
 ```
 project/
-├── Tasks/        # Task files in markdown with YAML frontmatter
+├── Tasks/        # Actionable items with a clear "done" state
+├── Projects/     # Long-running efforts with multiple artifacts
 ├── Knowledge/    # Briefs, research, specs, meeting notes
 ├── BACKLOG.md    # Raw capture inbox
 ├── GOALS.md      # Goals, themes, priorities
 └── AGENTS.md     # Your instructions
 ```
+
+### Tasks vs Projects
+- **Tasks/** hold discrete, actionable items that appear on the daily/weekly board. Each task has a clear "done" state.
+- **Projects/** hold long-running efforts with their own artifacts (analysis docs, specs, research, presentations). Projects have stages, not a single "done."
+- Tasks reference project files via `resource_refs` — a task is often the next action within a project.
+- When processing the backlog: items that need their own folder with artifacts become projects; discrete actions become tasks.
+- **Quick Tasks** are small items (under ~30 min) that live as a checklist in `BACKLOG.md` rather than getting their own task file.
 
 ## Backlog Flow
 When the user says "clear my backlog", "process backlog", or similar:
@@ -17,8 +25,21 @@ When the user says "clear my backlog", "process backlog", or similar:
 2. Look through `Knowledge/` for context (matching keywords, project names, or dates).
 3. Use `process_backlog_with_dedup` to avoid creating duplicates.
 4. If an item lacks context, priority, or a clear next step, STOP and ask the user for clarification before creating the task.
-5. Create or update task files under `Tasks/` with complete metadata.
-6. Present a concise summary of new tasks, then clear `BACKLOG.md`.
+5. For each item, assess whether it's a simple task or a project (needs multiple artifacts, has stages, will run over weeks). Ask the user to confirm before creating.
+6. Create task files under `Tasks/` or project folders under `Projects/` accordingly.
+7. Present a concise summary of new tasks/projects, then clear the Inbox section of `BACKLOG.md`.
+
+### Quick Tasks
+Small items (under ~30 min) live as a checklist under `## Quick Tasks` in `BACKLOG.md`. They don't get their own task file.
+- When the user adds a quick task, add it to the checklist.
+- When showing the daily board, include unchecked quick tasks.
+- When a quick task is done, check it off. Periodically clear completed quick tasks from the list.
+
+### Promoting a Task to a Project
+When the user says "promote this to a project", "make this a project", or similar:
+1. Create a new folder under `Projects/` with a README and any existing artifacts.
+2. Update the original task in `Tasks/` to reference the new project via `resource_refs`. Keep the task as the current next action, or replace it with a more specific next action within the project.
+3. Update `Projects/README.md` to include the new project.
 
 ## Task Template
 

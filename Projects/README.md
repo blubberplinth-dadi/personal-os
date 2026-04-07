@@ -10,6 +10,8 @@ Active and recent project work. Each folder contains PM artifacts (analysis, spe
 | Heimdallur v2 | `heimdallur-v2/` | Enabling: unified access control | Research done. ~100 stories drafted. | Vision canvas, 5 epics, Jira CSVs, Fríða's analysis |
 | JIRA Config | `jira-config/` | Foundational: execution tooling | Docs mature. Rollout ongoing. | Config guide, bug mgmt, user handbook, presentation |
 
+| Taking PM Ownership | `taking-pm-ownership/` | Personal Dev Goal 1 + foundational | Scoping — key questions defined | README only so far |
+
 ## Proposal
 
 | Project | Folder | Goal | Stage | Key artifacts |
