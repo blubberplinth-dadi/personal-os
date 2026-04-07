@@ -16,12 +16,17 @@
 |--------|------|-------|
 | Arinbjörn Ólafsson | VP of IT | |
 | Óskar Sigurgeirsson (Óskar S) | Head of Software Solutions | Óli's boss |
-| Snæbjörn | Head of Web Solutions | |
+| Snæbjörn Konráðsson | Head of Web Solutions | |
 | Ólafur Þórðarson (Óli) | Engineering Lead, Tryggingalausnir | Owns the eng team that builds TM's digital products |
 
 ## Relevant Teams
 
-**Tryggingalausnir** — Group within LB IT that develops and maintains TM's digital products (Bóthildur, Rósin, Vefsala, Heimdallur, etc.). This is the eng team Daði works with day to day.
+**Tryggingalausnir** — Group within LB IT that develops and maintains TM's digital products (Bóthildur, Rósin, Vefsala, Heimdallur, etc.). This is the eng team Daði works with day to day. Two dev teams within Tryggingalausnir:
+
+- **Bót** — Develops TM's digital claims services, most notably Bóthildur
+- **Ronja** — Develops TM's digital insurance services, plus some shared services used by both claims and insurance
+
+See [team.md](team.md) for detailed team composition and ways of working.
 
 ## Digital Products & Systems (relevant to TM)
 
@@ -32,7 +37,7 @@
 
 ## Relationship with TM
 
-**Acquisition:** LB acquired TM in early spring 2025. TM remains a separate corporation under LB's control — the insurance business operates independently but shares IT resources.
+**Acquisition:** LB acquired TM in early spring 2025. TM remains a separate corporation under LB's control — the insurance business operates independently but gets certain services from LB, most notably software development and other IT services.
 
 **Org structure overlap:**
 - TM's digital products are built by the Tryggingalausnir group within LB IT (led by Óli), not by TM's own developers

@@ -2,65 +2,44 @@
 
 ## Framtíðarsýn vöru (e. product vision)
 
-**Skilgreining vandamálsins sem varan á að leysa:** Aðgangsstýring að tryggingakerfum TM er dreifð á mörg kerfi og erfitt að hafa yfirsýn yfir hverjir hafa aðgang að hverju. Notendaþjónusta þarf að vinna í mörgum kerfum til að veita og afturkalla aðgang. Forstöðumenn deilda geta ekki auðveldlega séð hvaða aðgang starfsfólk þeirra hefur - sem er krafa frá endurskoðendum.
+**Skilgreining vandamálsins sem varan á að leysa:** Starfsfólk þjónustuvers og deildarstjórar þurfa að nota mörg ótengd kerfi og töflureikna til að sýsla með aðgangsheimildir starfsfólks. Þetta gerir umsýsluna flókna og ógagnsæja. Endurskoðendur krefjast þess að deildarstjórar geti séð hvaða aðgang starfsfólk þeirra hefur — í dag er það ekki hægt á einum stað.
 
-**Tilgangur:** Miðlægt kerfi til að stýra aðgangi og heimildum starfsfólks í öllum tryggingakerfum TM.
+**Tilgangur:** Einn staður til að sýsla með aðgangsheimildir starfsfólks í öllum tryggingakerfum TM.
 
-**Lykilnotendur:** Notendaþjónusta, forstöðumenn deilda
-**Aðrir notendur:** Allir sem þurfa að skoða aðgangsupplýsingar
+**Lykilnotendur:** Starfsfólk þjónustuvers (Nonni), deildarstjórar (Stefanía), hugbúnaðarfólk (Finnur)
+**Aðrir notendur:** Allir starfsmenn TM sem þurfa aðgang að tryggingakerfum
 
-**Staða vöruþróunar:** Í stöðugri þróun
+**Staða vöruþróunar:** Í stöðugri þróun. V1 í notkun — virkar vel til að skilgreina hlutverk og heimildir en krefst tækniþekkingar. V2 í undirbúningi.
+
+### Umfang og notkun
+- Stýrir aðgangsheimildum fyrir Bóthildi, Rósina, Vefsöluna og önnur TM kerfi
+- ~120 starfsmenn TM + ytri aðilar (SPATIL, TOYOTA)
+- 60 hópar, 820 tengingar notanda-hóps, 44 einstök heimildaauðkenni (í gömlu kerfi)
+
+### Tengd kerfi
+- **Bóthildur** — tjónakerfi, þegar tengt við Heimdall
+- **Rósin** — tryggingarkerfi, að hluta tengt
+- **Vefsalan** — sjálfsafgreiðsla viðskiptavina, að hluta tengt
+- **Græna** — eldra AS/400 kerfi, ekki enn tengt
+- **Dragon-core** — stærsta þjónustan, 44 heimildaauðkenni, ekki enn tengt
 
 ### Þarfir notenda
-
-**Notendaþjónusta (Nonni):**
-- Veita nýjum starfsmanni réttan aðgang og heimildir í tryggingakerfum
-- Fjarlægja aðgang og heimildir þegar starfsmaður hættir
-- Uppfæra aðgang og heimildir núverandi starfsmanns
-- Stofna og uppfæra Hlutverk (safn af Heimildum)
-- Stofna og uppfæra Heimild (safn af Aðgerðum)
-
-**Forstöðumenn (Stefanía):**
-- Skoða aðgang starfsfólks sinnar deildar
-- Skoða heimildir ákveðins starfsmanns
-- Skoða starfsfólk með ákveðinn aðgang eða heimildir
-- Fá yfirlit til að uppfylla kröfur endurskoðenda
+- Auðvelt að bæta við og fjarlægja aðgang þegar starfsfólk byrjar, hættir eða skiptir um deild
+- Skýrar upplýsingar um hvaða aðgang starfsmaður hefur og hvers vegna
+- Deildarstjórar geta séð aðgang starfsfólks síns án tæknilegrar aðstoðar
+- Hugbúnaðarfólk getur tengt kerfi við Heimdall án mikillar fyrirhafnar
+- Forðast „hlutverkasprengjuna" — of mörg hlutverk þegar fínkorna þarf heimildir
 
 ### Lykilvirkni
-
-- Notendaumsýsla (stofna, uppfæra, afvirkja)
-- Hlutverkaumsýsla (stofna, uppfæra, úthluta)
-- Heimildaumsýsla (stofna, uppfæra, tengja við hlutverk)
-- Umboðaumsýsla (aðili veitir öðrum aðgang að sínum gögnum)
-- Leit að notendum, hlutverkum og heimildum
-- Yfirsýn yfir aðgang starfsfólks (fyrir forstöðumenn)
+- Leit að starfsfólki og einingum
+- Yfirsýn yfir hlutverk, heimildir og tengingar notenda
+- Búa til, breyta og eyða hlutverkum og heimildum
+- Skoða og sýsla með aðgangsheimildir starfsmanns
+- Framselja aðgangsumsýslu til deildarstjóra
+- Tenging nýrra kerfa við Heimdall (API)
 
 ### Grunnreglur upplifunarinnar (e. experience principles)
 
-- Skýrt og einfalt fyrir daglega notkun
-- Góð yfirsýn fyrir stjórnendur og endurskoðendur
-- Öruggt - breytingar skráðar og rekjanlegar
-
-### Hugtakamódel
-
-```
-Notandi → Hlutverk → Heimild → Aðgerð
-```
-
-| Hugtak | Lýsing |
-|--------|--------|
-| **Notandi** | Starfsmaður eða kerfisnotandi sem þarf aðgang |
-| **Hlutverk** | Safn af heimildum sem tilheyra ákveðnu starfi (t.d. "Tjónafulltrúi") |
-| **Heimild** | Leyfi til að framkvæma ákveðnar aðgerðir (t.d. "Skoða tjón") |
-| **Aðgerð** | Tæknileg aðgerð í kerfi (t.d. read:claims, write:payment) |
-| **Umboð** | Þegar aðili veitir öðrum aðgang að sínum gögnum |
-
-### Tengsl við önnur kerfi
-
-Heimdallur á að sjá um aðgangsstýringu fyrir:
-- Bóthildur (tjónakerfi)
-- Rósin (tryggingaumsýsla)
-- Vefsala TM (netverslun)
-- Önnur innri kerfi TM
-
-**Núverandi staða:** Ekki öll kerfi hafa verið uppfærð til að nota Heimdall - sum nota enn eigin aðgangsstýringu.
+- Gagnsæi — hver sem er á að sjá hvaða aðgang hann hefur og hvers vegna
+- Einfaldleiki — deildarstjóri á að geta sinnt umsýslu án tækniþekkingar
+- Sveigjanleiki — styðja mismunandi gerðir aðgangs án þess að fjöldi hlutverka fari úr böndunum

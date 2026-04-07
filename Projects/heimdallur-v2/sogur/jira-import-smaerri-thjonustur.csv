@@ -1,0 +1,132 @@
+﻿Issue Type,Summary,Description,Epic Name,Epic Link,Component/s,Component/s
+Epic,Smærri þjónustur - Nútímakerfi í Heimdall,,Smærri þjónustur - Nútímakerfi í Heimdall,,API,Heimdallur
+Story,lib2b-service - Færa aðgangsstýringu í Heimdall,"Hvað þarf að gera og af hverju?
+Í lib2b-service er gömul aðgangsstýring á einum stað: /src/server/index.ts þar sem user.hasAccess athugar TIN.K heimild til að auðkenna notanda og veita aðgang að allri þjónustunni. Nýja aðgangsstýringin hefur ekki verið innleidd í þessari þjónustu svo þarf að skipta út gömlu þegar búið er að ganga úr skugga um að allir viðeigandi notendur hafi réttar heimildir í Heimdalli.
+
+Gátlisti
+* Aðgerð/heimild til í kóða (TIN.K eða sambærileg heimild í Heimdalli)
+* Hlutverk/heimild/aðgerð til í Heimdalli
+* Notendur uppfærðir í Heimdalli — nota gömlu hópana sem viðmið (NTIAPI hópur er með TIN.K aðgerð)
+* Gömul aðgangsstýring fjarlægð úr /src/server/index.ts
+* Prófað (kóði + aðgangur)
+
+Done þýðir
+- lib2b-service notar Heimdall til aðgangsstýringar í stað user.hasAccess('TIN.K')
+- Notendur sem voru í NTIAPI hóp hafa aðgang í gegnum hlutverk í Heimdalli",,Smærri þjónustur - Nútímakerfi í Heimdall,API,Heimdallur
+Story,server-events-service - Færa aðgangsstýringu í Heimdall,"Hvað þarf að gera og af hverju?
+Í server-events-service er gömul aðgangsstýring á einum stað: /src/drivers/graphql/schema/sendSms.ts þar sem user.hasAccess athugar TOY.* heimild. Nýja aðgangsstýringin hefur ekki verið innleidd í þessari þjónustu svo þarf að skipta út gömlu þegar búið er að ganga úr skugga um að allir viðeigandi notendur hafi réttar heimildir í Heimdalli.
+
+Gátlisti
+* Aðgerð/heimild til í kóða (TOY.* eða sambærileg heimild í Heimdalli)
+* Hlutverk/heimild/aðgerð til í Heimdalli
+* Notendur uppfærðir í Heimdalli — nota gömlu hópana sem viðmið (TOYDATA og TOYOTA hópar eru með TOY.* aðgerðir)
+* Gömul aðgangsstýring fjarlægð úr /src/drivers/graphql/schema/sendSms.ts
+* Prófað (kóði + aðgangur)
+
+Done þýðir
+- server-events-service notar Heimdall til aðgangsstýringar í stað user.hasAccess('TOY.*')
+- Notendur sem voru í TOYDATA og TOYOTA hópum hafa aðgang í gegnum hlutverk í Heimdalli",,Smærri þjónustur - Nútímakerfi í Heimdall,API,Heimdallur
+Story,umsoknir - Færa aðgangsstýringu í Heimdall,"Hvað þarf að gera og af hverju?
+Í umsoknir er gömul aðgangsstýring á tveimur stöðum: /server/routes/umsoknir.ts þar sem user.hasAccess athugar UMS.R heimild, og /server/routes/solumenn.ts þar sem user.tegund === 'STM' athugun er notuð. Nýja aðgangsstýringin hefur ekki verið innleidd í þessari þjónustu svo þarf að skipta út gömlu þegar búið er að ganga úr skugga um að allir viðeigandi notendur hafi réttar heimildir í Heimdalli.
+
+Gátlisti
+* Aðgerð/heimild til í kóða (UMS.R eða sambærileg heimild í Heimdalli)
+* Heimild/hlutverk í Heimdalli sem tekur við af user.tegund === 'STM' athugun
+* Hlutverk/heimild/aðgerð til í Heimdalli
+* Notendur uppfærðir í Heimdalli — nota gömlu hópana sem viðmið (LifTjon og UMSATH hópar eru með UMS.R aðgerð)
+* Gömul aðgangsstýring fjarlægð úr /server/routes/umsoknir.ts og /server/routes/solumenn.ts
+* Prófað (kóði + aðgangur)
+
+Done þýðir
+- umsoknir notar Heimdall til aðgangsstýringar í stað user.hasAccess('UMS.R') og user.tegund === 'STM'
+- Notendur sem voru í LifTjon og UMSATH hópum hafa aðgang í gegnum hlutverk í Heimdalli",,Smærri þjónustur - Nútímakerfi í Heimdall,API,Heimdallur
+Story,person-service - Færa aðgangsstýringu í Heimdall,"Hvað þarf að gera og af hverju?
+Í person-service er gömul aðgangsstýring á einum stað: /service/server/authorizer.ts þar sem user.hasAccess athugar PER.T og PER.G heimildir. Nýja aðgangsstýringin hefur ekki verið innleidd í þessari þjónustu svo þarf að skipta út gömlu þegar búið er að ganga úr skugga um að allir viðeigandi notendur hafi réttar heimildir í Heimdalli.
+
+Gátlisti
+* Aðgerð/heimild til í kóða (PER.T, PER.G eða sambærilegar heimildir í Heimdalli)
+* Hlutverk/heimild/aðgerð til í Heimdalli
+* Notendur uppfærðir í Heimdalli — nota gömlu hópana sem viðmið (SPATIL, TINDGRU og TOYOTA hópar eru með PER.T; GDPR, SÖLGJD1, TINDGRU og TOYOTA hópar eru með PER.G)
+* Gömul aðgangsstýring fjarlægð úr /service/server/authorizer.ts
+* Prófað (kóði + aðgangur)
+
+Done þýðir
+- person-service notar Heimdall til aðgangsstýringar í stað user.hasAccess('PER.T') og user.hasAccess('PER.G')
+- Notendur sem voru í viðeigandi hópum (SPATIL, TINDGRU, TOYOTA, GDPR, SÖLGJD1) hafa aðgang í gegnum hlutverk í Heimdalli",,Smærri þjónustur - Nútímakerfi í Heimdall,API,Heimdallur
+Story,tjon-service - Færa aðgangsstýringu í Heimdall,"Hvað þarf að gera og af hverju?
+Í tjon-service er gömul aðgangsstýring á einum stað: /server/accessControl/userServiceAuthorizationControl.ts þar sem user.hasAccess athugar TJO.P, tes.T, TJO.L og TJO.N heimildir. Nýja aðgangsstýringin hefur ekki verið innleidd í þessari þjónustu svo þarf að skipta út gömlu þegar búið er að ganga úr skugga um að allir viðeigandi notendur hafi réttar heimildir í Heimdalli.
+
+Gátlisti
+* Aðgerð/heimild til í kóða (TJO.P, tes.T, TJO.L, TJO.N eða sambærilegar heimildir í Heimdalli)
+* Hlutverk/heimild/aðgerð til í Heimdalli
+* Notendur uppfærðir í Heimdalli — nota gömlu hópana sem viðmið (TJOSLY hópur er með TJO.P; margir tjónahópar eru með TJO.L og TJO.N)
+* Gömul aðgangsstýring fjarlægð úr /server/accessControl/userServiceAuthorizationControl.ts
+* Prófað (kóði + aðgangur)
+
+Done þýðir
+- tjon-service notar Heimdall til aðgangsstýringar í stað gamalla hasAccess athugana
+- Notendur sem voru í viðeigandi tjónahópum hafa aðgang í gegnum hlutverk í Heimdalli",,Smærri þjónustur - Nútímakerfi í Heimdall,API,Heimdallur
+Story,common-claims-api - Færa aðgangsstýringu í Heimdall,"Hvað þarf að gera og af hverju?
+Í common-claims-api er gömul aðgangsstýring á einum stað: /src/main.ts þar sem user.hasAccess athugar TJO.C heimild. Nýja aðgangsstýringin hefur ekki verið innleidd í þessari þjónustu svo þarf að skipta út gömlu þegar búið er að ganga úr skugga um að allir viðeigandi notendur hafi réttar heimildir í Heimdalli.
+
+Gátlisti
+* Aðgerð/heimild til í kóða (TJO.C eða sambærileg heimild í Heimdalli)
+* Hlutverk/heimild/aðgerð til í Heimdalli
+* Notendur uppfærðir í Heimdalli — nota gömlu hópana sem viðmið (UPPFOR1 hópur er með TJO.C aðgerð)
+* Gömul aðgangsstýring fjarlægð úr /src/main.ts
+* Prófað (kóði + aðgangur)
+
+Done þýðir
+- common-claims-api notar Heimdall til aðgangsstýringar í stað user.hasAccess('TJO.C')
+- Notendur sem voru í UPPFOR1 hóp hafa aðgang í gegnum hlutverk í Heimdalli",,Smærri þjónustur - Nútímakerfi í Heimdall,API,Heimdallur
+Story,gdpr-service - Færa aðgangsstýringu í Heimdall,"Hvað þarf að gera og af hverju?
+Í gdpr-service er gömul aðgangsstýring á einum stað: /service/server/index.ts þar sem user.hasAccess athugar PER.G heimild. Nýja aðgangsstýringin hefur ekki verið innleidd í þessari þjónustu svo þarf að skipta út gömlu þegar búið er að ganga úr skugga um að allir viðeigandi notendur hafi réttar heimildir í Heimdalli.
+
+Gátlisti
+* Aðgerð/heimild til í kóða (PER.G eða sambærileg heimild í Heimdalli)
+* Hlutverk/heimild/aðgerð til í Heimdalli
+* Notendur uppfærðir í Heimdalli — nota gömlu hópana sem viðmið (GDPR, SÖLGJD1, TINDGRU og TOYOTA hópar eru með PER.G aðgerð)
+* Gömul aðgangsstýring fjarlægð úr /service/server/index.ts
+* Prófað (kóði + aðgangur)
+
+Done þýðir
+- gdpr-service notar Heimdall til aðgangsstýringar í stað user.hasAccess('PER.G')
+- Notendur sem voru í viðeigandi hópum (GDPR, SÖLGJD1, TINDGRU, TOYOTA) hafa aðgang í gegnum hlutverk í Heimdalli",,Smærri þjónustur - Nútímakerfi í Heimdall,API,Heimdallur
+Story,insurance-change-request - Færa aðgangsstýringu í Heimdall,"Hvað þarf að gera og af hverju?
+Í insurance-change-request er gömul aðgangsstýring á einum stað: /src/accessControl/userServiceAuthorizationControl.ts þar sem user.hasAccess athugar TRG.D heimild. Nýja aðgangsstýringin hefur ekki verið innleidd í þessari þjónustu svo þarf að skipta út gömlu þegar búið er að ganga úr skugga um að allir viðeigandi notendur hafi réttar heimildir í Heimdalli.
+
+Gátlisti
+* Aðgerð/heimild til í kóða (TRG.D eða sambærileg heimild í Heimdalli)
+* Hlutverk/heimild/aðgerð til í Heimdalli
+* Notendur uppfærðir í Heimdalli — nota gömlu hópana sem viðmið (DESVTR, UPPFOR1 og VID hópar eru með TRG.D aðgerð)
+* Gömul aðgangsstýring fjarlægð úr /src/accessControl/userServiceAuthorizationControl.ts
+* Prófað (kóði + aðgangur)
+
+Done þýðir
+- insurance-change-request notar Heimdall til aðgangsstýringar í stað user.hasAccess('TRG.D')
+- Notendur sem voru í DESVTR, UPPFOR1 og VID hópum hafa aðgang í gegnum hlutverk í Heimdalli",,Smærri þjónustur - Nútímakerfi í Heimdall,API,Heimdallur
+Story,ahaettuskodanir-service - Færa aðgangsstýringu í Heimdall,"Hvað þarf að gera og af hverju?
+Í ahaettuskodanir-service er gömul aðgangsstýring á einum stað: /src/vehicleKasko/api.ts þar sem user.hasAccess athugar KAS.G heimild. Nýja aðgangsstýringin hefur ekki verið innleidd í þessari þjónustu svo þarf að skipta út gömlu þegar búið er að ganga úr skugga um að allir viðeigandi notendur hafi réttar heimildir í Heimdalli.
+
+Gátlisti
+* Aðgerð/heimild til í kóða (KAS.G eða sambærileg heimild í Heimdalli)
+* Hlutverk/heimild/aðgerð til í Heimdalli
+* Notendur uppfærðir í Heimdalli — nota gömlu hópana sem viðmið (UPPFOR1 og VID hópar eru með KAS.G aðgerð)
+* Gömul aðgangsstýring fjarlægð úr /src/vehicleKasko/api.ts
+* Prófað (kóði + aðgangur)
+
+Done þýðir
+- ahaettuskodanir-service notar Heimdall til aðgangsstýringar í stað user.hasAccess('KAS.G')
+- Notendur sem voru í UPPFOR1 og VID hópum hafa aðgang í gegnum hlutverk í Heimdalli",,Smærri þjónustur - Nútímakerfi í Heimdall,API,Heimdallur
+Story,endurnyjun-service - Færa aðgangsstýringu í Heimdall,"Hvað þarf að gera og af hverju?
+Óljóst hvar og hvernig gömul aðgangsstýring er notuð í endurnyjun-service. Þarf rannsókn áður en hægt er að skilgreina nákvæma útfærslu.
+
+Gátlisti
+* Rannsaka hvar gömul aðgangsstýring er notuð í þjónustunni
+* Aðgerð/heimild til í kóða eða sambærileg heimild í Heimdalli
+* Hlutverk/heimild/aðgerð til í Heimdalli
+* Notendur uppfærðir í Heimdalli
+* Gömul aðgangsstýring fjarlægð
+* Prófað (kóði + aðgangur)
+
+Done þýðir",,Smærri þjónustur - Nútímakerfi í Heimdall,API,Heimdallur
