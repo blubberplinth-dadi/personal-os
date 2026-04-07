@@ -13,10 +13,9 @@ project/
 ```
 
 ### Tasks vs Projects
-- **Tasks/** hold discrete, actionable items that appear on the daily/weekly board. Each task has a clear "done" state.
-- **Projects/** hold long-running efforts with their own artifacts (analysis docs, specs, research, presentations). Projects have stages, not a single "done."
-- Tasks reference project files via `resource_refs` — a task is often the next action within a project.
-- When processing the backlog: items that need their own folder with artifacts become projects; discrete actions become tasks.
+- **Tasks/** hold standalone actionable items not tied to a specific project. Each task has its own file with full YAML frontmatter.
+- **Projects/** hold long-running efforts with their own artifacts and their own task list. Project tasks use a lightweight checklist format inside `TASKS.md` within the project folder.
+- When processing the backlog: items that need their own folder with artifacts become projects; discrete actions become standalone tasks.
 - **Quick Tasks** are small items (under ~30 min) that live as a checklist in `BACKLOG.md` rather than getting their own task file.
 
 ## Backlog Flow
@@ -34,6 +33,19 @@ Small items (under ~30 min) live as a checklist under `## Quick Tasks` in `BACKL
 - When the user adds a quick task, add it to the checklist.
 - When showing the daily board, include unchecked quick tasks.
 - When a quick task is done, check it off. Periodically clear completed quick tasks from the list.
+
+### Project Task List
+Each project can have a `TASKS.md` file with a lightweight checklist format:
+
+```markdown
+# Tasks
+
+- [ ] Task description | P1 | context or notes
+- [ ] Another task | P0 | due 2026-04-15
+- [x] Completed task | P2
+```
+
+Each line: checkbox, description, priority, and optional notes separated by `|`. No YAML frontmatter needed.
 
 ### Promoting a Task to a Project
 When the user says "promote this to a project", "make this a project", or similar:
@@ -75,7 +87,7 @@ Tie to goals and reference material.
 - Remind the user when active tasks do not support any current goals.
 
 ## Daily Guidance
-- Answer prompts like "What should I work on today?" by inspecting priorities, statuses, and goal alignment.
+- Answer prompts like "What should I work on today?" by pulling from all three sources: standalone tasks (`Tasks/`), project tasks (`Projects/*/TASKS.md`), and quick tasks (`BACKLOG.md`). Prioritize across all of them.
 - Suggest no more than three focus tasks unless the user insists.
 - Flag blocked tasks and propose next steps or follow-up questions.
 
