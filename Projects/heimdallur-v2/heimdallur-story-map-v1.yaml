@@ -1,0 +1,113 @@
+# Heimdallur v1 User Story Map
+# Structure reference - documents the scope of Heimdallur v1
+# Source: Miro export (Heimdallur.csv)
+# Last updated: 2026-01-29
+
+meta:
+  note: "JSON skjal - hvernig sýslum við með svoleiðis"
+
+themes:
+
+  - name: Innskráning
+    activities:
+      - name: Skrá sig inn
+        stories:
+          - Skrá inn með AD
+
+  - name: Leita
+    activities:
+      - name: Leita að aðila
+        stories:
+          - Finna aðila út frá kennitölu
+          - Finna aðila út frá nafni
+          - Finna aðila út frá notandanafni
+      - name: Leita að starfsfólki á yfirliti
+        stories:
+          - Finna starfsmann út frá kennitölu
+          - Finna starfsmann út frá nafni
+          - Finna starfsmann út frá notandanafni
+          - Sjá nýlega leitarstrengi
+
+  - name: Vinna með aðila
+    activities:
+      - name: Skoða aðila
+        stories:
+          - Skoða nafn og notendalista aðila
+          - Skoða aðila nánar
+      - name: Stofna notanda á aðila
+        stories:
+          - Stofna notanda
+      - name: Skoða umboð aðila
+        stories:
+          - Skoða umboð sem aðili veitir öðrum
+          - Skoða umboð sem aðila er veitt
+          - Skoða breytingaskrá umboða
+      - name: Sýsla með umboð aðila
+        stories:
+          - Veita umboð
+          - Fjarlægja umboð
+          - Breyta umboði
+
+  - name: Vinna með notanda
+    activities:
+      - name: Skoða notanda
+        stories:
+          - Skoða grunnupplýsingar
+          - Skoða hlutverkalista notanda
+          - Skoða breytingaskrá notanda
+      - name: Sýsla með notanda
+        stories:
+          - Bæta við hlutverki á notanda
+          - Fjarlægja hlutverk af notanda
+
+  - name: Vinna með hlutverk
+    activities:
+      - name: Skoða öll hlutverk
+        stories:
+          - Skoða hlutverkalista
+          - Leita í hlutverkalista
+          - Sía hlutverkalista
+      - name: Stofna hlutverk
+        stories:
+          - Stofna hlutverk
+      - name: Skoða ákveðið hlutverk
+        stories:
+          - Skoða grunnupplýsingar hlutverks
+          - Skoða heimildir hlutverks
+          - Skoða ákveðna heimild hlutverks nánar
+          - Skoða breytingaskrá hlutverks
+          - Skoða lista notenda með ákveðið hlutverk
+      - name: Sýsla með ákveðið hlutverk
+        stories:
+          - Breyta lýsingu hlutverks
+          - Bæta við heimild á hlutverk
+          - Fjarlægja heimild af hlutverki
+          - Eyða hlutverki
+          - Takmarka heimildafjölda hlutverks?
+
+  - name: Vinna með heimildir
+    activities:
+      - name: Skoða heimildir
+        stories:
+          - Skoða heimildalista
+          - Leita í heimildalista
+      - name: Stofna heimild
+        stories:
+          - Stofna heimild
+      - name: Skoða heimild
+        stories:
+          - Skoða grunnupplýsingar heimildar
+          - Skoða ákveðna heimild nánar
+          - Skoða fullyrðingar heimildar
+          - Skoða breytingaskrá heimildar
+          - Skoða lista notenda (hlutverka?) með þessa heimild
+      - name: Sýsla með heimild
+        stories:
+          - Breyta heimild
+          - Eyða heimild
+
+  - name: Vinna með starfsfólk
+    activities:
+      - name: Skoða starfsfólk
+        stories:
+          - Skoða yfirlit yfir starfsfólk

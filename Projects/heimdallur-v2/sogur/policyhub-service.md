@@ -1,0 +1,185 @@
+# policyhub-service - Nútímakerfi í Heimdall
+
+> Epic: Bæta við nýju aðgangsstýringunni þar sem hana vantar og fjarlægja gömlu aðgangsstýringuna allsstaðar í policyhub-service. Nýja aðgangsstýringin er þegar til staðar á mörgum stöðum.
+
+---
+
+### Hreinsun — Fjarlægja gömlu þar sem nýja er þegar komin
+
+**Hvað þarf að gera og af hverju?**
+Þrjár skrár nota nú þegar nýju aðgangsstýringuna en gömlu hefur ekki verið fjarlægð. Þetta er hreint tæknileg hreinsun — bara fjarlægja gömlu kóðann.
+
+| Skrá | Gömul aðgerð | Staða |
+|------|-------------|-------|
+| `/src/server/packagesystem/packageFunctions/authorizedFindById.ts` | TRG.C | Nýja komin, fjarlægja gömlu |
+| `/src/server/policysystems/index.ts` | TRG.U | Nýja komin, fjarlægja gömlu |
+| `/src/server/shema/operations.policy` | TRG.G | Nýja komin, fjarlægja gömlu |
+
+**Gátlisti**
+- □ Fjarlægja gömlu aðgangsstýringuna úr `authorizedFindById.ts`
+- □ Fjarlægja gömlu aðgangsstýringuna úr `policysystems/index.ts`
+- □ Fjarlægja gömlu aðgangsstýringuna úr `operations.policy`
+- □ Prófað (kóði + aðgangur)
+
+**Done þýðir**
+- Engin gömul aðgangsstýring eftir í þessum þremur skrám
+- Nýja aðgangsstýringin ein í notkun
+
+---
+
+### authorizePackage — Pakkaaðgangsstýring í Heimdall
+
+**Hvað þarf að gera og af hverju?**
+Í `/src/server/accesscontrol/authorizePackage.ts` er `hasPackageAccess` fall sem notar gömlu aðgangsstýringuna með 550.C, PAK.C, 550.R og PAK.R aðgerðum. Þarf annað hvort að hætta að nota `hasPackageAccess` eða breyta því svo það noti Heimdall.
+
+**Gátlisti**
+- □ Ákvarða hvort `hasPackageAccess` eigi að hætta eða endurskrifa
+- □ Heimildir/aðgerðir til í Heimdalli (550.C, PAK.C, 550.R, PAK.R eða sambærilegar)
+- □ Hlutverk/heimild/aðgerð til í Heimdalli
+- □ Notendur uppfærðir í Heimdalli — nota gömlu hópana sem viðmið (child hópur er með PAK.R, 550.C, 550.R; TOYOTA hópur er með PAK.R, 550.C, 550.R)
+- □ Gömul aðgangsstýring fjarlægð
+- □ Prófað (kóði + aðgangur)
+
+**Done þýðir**
+- `authorizePackage.ts` notar heimildir í Heimdalli í stað `hasPackageAccess` með gömlum aðgerðakóðum
+- Notendur sem voru í child og TOYOTA hópum hafa aðgang í gegnum hlutverk í Heimdalli
+
+---
+
+### authorizePolicy — createHasPolicyAuthorization í Heimdall
+
+**Hvað þarf að gera og af hverju?**
+Í `/src/server/accesscontrol/authorizePolicy.ts` er `createHasPolicyAuthorization` fall sem notar `isReadAndHasBasicReadAccess` og/eða `accessFunction` með mörgum aðgerðum: 242.Y, TOY.*, TOY.L, TOY.T, 360.R, 360.W og NTI.R. Þetta er flókið fall sem athugar hvort notandi sé starfsmaður, notandi eða maki með `isEmployee` og `isUserOrSpouse`. Þessi föll eru sem væri best að losna einhvernvegin við líka þar sem heimildir í Heimdalli ættu í raun að sjá um allt svona.
+
+**Gátlisti**
+- □ Greina `createHasPolicyAuthorization`, `isReadAndHasBasicReadAccess` og `accessFunction` föll
+- □ Ákvarða hvaða heimildir í Heimdalli taka við af 242.Y, TOY.*, TOY.L, TOY.T, 360.R, 360.W, NTI.R
+- □ Ákvarða hvernig `isEmployee` og `isUserOrSpouse` athuganir flytjast yfir í Heimdall
+- □ Hlutverk/heimild/aðgerð til í Heimdalli
+- □ Notendur uppfærðir í Heimdalli — nota gömlu hópana sem viðmið (cyber hópur er með 242.Y; TOYOTA og UPPFOR1 eru með TOY.*; TOYDATA er með TOY.L og TOY.T; child og UPPFOR1 eru með 360.R og 360.W; NTIAPI er með NTI.R)
+- □ Gömul aðgangsstýring fjarlægð
+- □ Prófað (kóði + aðgangur)
+
+**Done þýðir**
+- `authorizePolicy.ts` notar heimildir í Heimdalli í stað gamalla `isReadAndHasBasicReadAccess` og `accessFunction` falla
+- `isEmployee` og `isUserOrSpouse` athuganir ekki lengur notaðar — Heimdallur sér um
+
+---
+
+### authUtils — isReadAndHasBasicReadAccess í Heimdall
+
+**Hvað þarf að gera og af hverju?**
+Í `/src/server/accesscontrol/authUtils.ts` er `isReadAndHasBasicReadAccess` fall sem notar TRG.G heimild. Þarf að fjarlægja þetta fall og hætta að nota það, eða breyta því þannig að það noti nýju aðgangsstýringuna. Þetta fall er líka notað í `authorizePolicy.ts` (sjá sögu fyrir ofan).
+
+**Gátlisti**
+- □ Ákvarða hvort `isReadAndHasBasicReadAccess` eigi að fjarlægja alveg eða endurskrifa
+- □ Skoða alla staði sem kalla þetta fall
+- □ Skipta út fyrir heimild í Heimdalli (TRG.G eða sambærileg)
+- □ Gömul aðgangsstýring fjarlægð
+- □ Prófað (kóði + aðgangur)
+
+**Done þýðir**
+- `authUtils.ts` inniheldur ekki `isReadAndHasBasicReadAccess` á gömlum aðgerðum
+- Öll föll sem kölluðu þetta nota nýju aðgangsstýringuna
+
+---
+
+### TRG.C heimildir í packageFunctions
+
+**Hvað þarf að gera og af hverju?**
+Fjórar skrár í packageFunctions nota `user.hasAccess` með TRG.C heimild. Þetta eru allt einföld `hasAccess` tékk sem ætti ekki að vera mikið mál að skipta yfir. Athugasemd frá Torfa: þarf að gera lista yfir aðila sem eru með TRG.C heimild og búa til heimild í Heimdalli og setja á notendur.
+
+| Skrá | Notkun |
+|------|--------|
+| `/src/server/packagesystem/packageFunctions/findPakkarByKt.ts` | Aukin leitarskilyrði í gagnagrunns query |
+| `/src/server/packagesystem/packageFunctions/yfirlit.ts` | Einfalt hasAccess tékk |
+| `/src/server/packagesystem/packageFunctions/utgafafinder.ts` | Einfalt hasAccess tékk |
+| `/src/server/packagesystem/gdpr/gdprUtgafaFind.ts` | Einfalt hasAccess tékk |
+
+**Gátlisti**
+- □ Heimild í Heimdalli sem samsvarar TRG.C
+- □ Gera lista yfir notendur með TRG.C — nota gömlu hópana sem viðmið (LOKTRG hópur er með TRG.C)
+- □ Skipta `user.hasAccess('TRG.C')` út í öllum fjórum skrám
+- □ Gömul aðgangsstýring fjarlægð
+- □ Prófað (kóði + aðgangur)
+
+**Done þýðir**
+- Allar fjórar packageFunctions skrár nota Heimdall í stað `user.hasAccess('TRG.C')`
+- Notendur sem voru í LOKTRG hóp hafa aðgang í gegnum hlutverk í Heimdalli
+
+---
+
+### residentsAssociation — TRG.F í Heimdall
+
+**Hvað þarf að gera og af hverju?**
+Í `/src/server/policysystems/common/residentsAssociation.ts` er gömul aðgangsstýring í `createIsRealEstateInsuredByResidentsAssociation` falli sem notar TRG.F heimild. Ætti að vera hægt að nota `isAuthorized` fallið hér.
+
+**Gátlisti**
+- □ Heimild í Heimdalli sem samsvarar TRG.F
+- □ Hlutverk/heimild/aðgerð til í Heimdalli
+- □ Notendur uppfærðir í Heimdalli — nota gömlu hópana sem viðmið (TRG.F er í 15 hópum, m.a. AtvRek1-3, hagdeil, LAN1, SÖLGJD1, TjDeild, TJOSKP, TJOSLY, UPPFOR1, URVINN, VORSTR, Radgjv, tolumsj)
+- □ Gömul aðgangsstýring fjarlægð úr `residentsAssociation.ts`
+- □ Prófað (kóði + aðgangur)
+
+**Done þýðir**
+- `residentsAssociation.ts` notar `isAuthorized` / Heimdall í stað `user.hasAccess('TRG.F')`
+
+---
+
+### applyDiscountCode — TRG.U og TRG.G í Heimdall
+
+**Hvað þarf að gera og af hverju?**
+Í `/src/server/schema/operations/renew/applyDiscountCode.ts` er gömul aðgangsstýring efst í fallinu sem athugar TRG.U og TRG.G heimildir. Gæti þurft að bæta við tékki með nýju aðgangsstýringunni — þetta er bara smá tékk til að athuga hvort notandi hafir aðgang til að gefa afslátt.
+
+**Gátlisti**
+- □ Heimildir í Heimdalli sem samsvara TRG.U og TRG.G
+- □ Hlutverk/heimild/aðgerð til í Heimdalli
+- □ Notendur uppfærðir í Heimdalli — nota gömlu hópana sem viðmið (TRG.U er í 16 hópum; TRG.G er í 22 hópum)
+- □ Gömul aðgangsstýring fjarlægð úr `applyDiscountCode.ts`
+- □ Prófað (kóði + aðgangur)
+
+**Done þýðir**
+- `applyDiscountCode.ts` notar heimildir í Heimdalli í stað gamalla hasAccess athugana
+
+---
+
+### isToyotaUser / TOY.* í Heimdall
+
+**Hvað þarf að gera og af hverju?**
+Í `/src/server/utils/filters.ts` er `isToyotaUser` breyta búin til sem athugar hvort notandi hafi TOY.* réttindi. Fríða finn ekki hvar annars hún er notuð. Ætti ekki að vera mikið mál að skipta yfir í nýju aðgangsstýringuna.
+
+**Gátlisti**
+- □ Finna alla staði sem nota `isToyotaUser` breytuna
+- □ Heimild í Heimdalli sem samsvarar TOY.*
+- □ Notendur uppfærðir í Heimdalli — nota gömlu hópana sem viðmið (TOYOTA og UPPFOR1 hópar eru með TOY.*)
+- □ Gömul aðgangsstýring fjarlægð úr `filters.ts`
+- □ Prófað (kóði + aðgangur)
+
+**Done þýðir**
+- `isToyotaUser` notar Heimdall í stað `user.hasAccess('TOY.*')`
+
+---
+
+### user.starfsmadur og STM tegund í packageFunctions
+
+**Hvað þarf að gera og af hverju?**
+Fjórar skrár í packageFunctions nota `user.starfsmadur` eða `options.starfsmadur` eða 'STM' tegund til að ákvarða hvort notandi sé starfsmaður og birta eða fela upplýsingar eftir því. Þetta á allt saman að losna við og nota Heimdall í staðinn.
+
+| Skrá | Notkun |
+|------|--------|
+| `/src/server/packagesystem/packageFunctions/findPopulatedPakki.ts` | `user.starfsmadur` í `createCreatePackageFromData` til að segja til um hvort upplýsingar séu settar inn |
+| `/src/server/packagesystem/packageFunctions/model/skirteini.ts` | `user.starfsmadur` til að ákvarða hvaða upplýsingar notandi fái |
+| `/src/server/packagesystem/packageFunctions/model/pakkiWrapper.ts` | `options.starfsmadur` kemur inn frá `findPopulatedPakki.ts` — skoða hvort aðgangsstýrum þessum gögnum einnig |
+| `/src/server/packagesystem/packageFunctions/pakkifinder.ts` | 'STM' tegund til að sækja upplýsingar — skoða hvað gerist þegar við tökum tegundina |
+
+**Gátlisti**
+- □ Greina hvernig `user.starfsmadur` flæðir í gegnum þessar skrár (findPopulatedPakki → pakkiWrapper → skirteini)
+- □ Ákvarða hvaða heimild í Heimdalli tekur við
+- □ Skoða hvað gerist þegar `pakkifinder.ts` hættir að nota 'STM' tegund
+- □ Skipta út `user.starfsmadur` og `options.starfsmadur` í öllum fjórum skrám
+- □ Gömul aðgangsstýring fjarlægð
+- □ Prófað (kóði + aðgangur)
+
+**Done þýðir**
+- Engin `user.starfsmadur`, `options.starfsmadur` eða 'STM' tegund notkun eftir í packageFunctions
+- Heimdallur stýrir hvort notandi sjái viðeigandi upplýsingar
