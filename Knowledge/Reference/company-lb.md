@@ -16,7 +16,8 @@
 |--------|------|-------|
 | Arinbjörn Ólafsson | VP of IT | |
 | Óskar Sigurgeirsson (Óskar S) | Head of Software Solutions | Óli's boss |
-| Snæbjörn Konráðsson | Head of Web Solutions | |
+| Snæbjörn Konráðsson | Head of Web Solutions (Vefdeild) | Owns customer-facing UI for bank customers. Wants broader ownership of Vefsala. |
+| Þórunn Inga Ingjaldsdóttir | Head of Insurance Sales & Service (individuals) | Leads a small LB dept focused on sales and service of insurance for individuals. Some TM people moved to this dept. |
 | Ólafur Þórðarson (Óli) | Engineering Lead, Tryggingalausnir | Owns the eng team that builds TM's digital products |
 
 ## Relevant Teams
@@ -27,6 +28,10 @@
 - **Ronja** — Develops TM's digital insurance services, plus some shared services used by both claims and insurance
 
 See [team.md](team.md) for detailed team composition and ways of working.
+
+**Vefdeild** — Web Solutions group within LB IT (led by Snæbjörn). Responsible for customer-facing UI across the bank's digital channels. Adjacent to Tryggingalausnir — Vefdeild handles frontend/UI for bank customers while Tryggingalausnir handles insurance backend. For customer-facing insurance products (Vefsala, Mínar síður), this creates a split where UI and business logic are owned by different groups.
+
+**Þórunn Inga's dept** — Small department within LB focused on insurance sales and service for individual customers. Some TM employees were moved here. Relationship to digital product ownership is still being defined.
 
 ## Digital Products & Systems (relevant to TM)
 
@@ -46,5 +51,5 @@ See [team.md](team.md) for detailed team composition and ways of working.
 
 **Product ownership:**
 - **TM-owned:** Bóthildur, Rósin, Heimdallur, Græna tryggingakerfið, Græna tjónakerfið
-- **Transitioning to LB:** Vefsala, Mínar síður — originally developed by TM, now moving to LB ownership
+- **Transitioning to LB:** Vefsala, Mínar síður — originally developed by TM, now moving to LB ownership. Product ownership is fragmented across Óskar Örn (TM), Vefdeild (LB), Þórunn Inga's dept (LB), and Tryggingalausnir (LB). See `Projects/empowered-product-teams/a3-product-ownership.md` for analysis.
 - **LB-owned (shared):** Banking portal, mobile apps, shared infra and APIs

@@ -25,9 +25,11 @@
 
 ## Digital Products Transitioning to LB
 
-**Vefsalan** — Portal for individual customers to purchase insurance. Originally developed by TM, now being moved to LB.
+**Vefsalan** — Portal for individual customers to purchase insurance. Originally developed by TM, now being moved to LB. Currently serves two experiences: TM-branded (via tm.is) and LB/TM co-branded (via LB channels, marketed as "LB Tryggingar"). Long-term strategy: customers buy insurance through the bank, "vátryggt af TM."
 
 **Mínar síður** — Customer portal. Originally developed by TM, now being moved to LB.
+
+**Strategy:** TM retains responsibility for insurance product definition (including pricing), claims, and corporate clients. Individual customer-facing digital channels are moving to LB. Product ownership of these channels is currently fragmented — see `Projects/empowered-product-teams/a3-product-ownership.md`.
 
 ## Organizational Structure
 

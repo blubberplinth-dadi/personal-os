@@ -79,6 +79,13 @@ Daði attends all Ronja standups and assists Óskar Örn and Óli with analysis,
 - **Miro** — Visual documentation and collaboration
 - **Outlook** — Managing meetings, emails
 
+## Adjacent Teams & People
+
+| Person | Role | Team | Notes |
+|--------|------|------|-------|
+| Snæbjörn Konráðsson | Head of Vefdeild (Web Solutions) | LB IT | Owns customer-facing UI for bank. Wants broader ownership of Vefsala. |
+| Þórunn Inga Ingjaldsdóttir | Head of Insurance Sales & Service (individuals) | LB | Small dept, some TM people moved here. Role in digital product decisions still being defined. |
+
 ## Who to Go to for What
 
 | Need | Person |

@@ -53,6 +53,17 @@ When the user says "promote this to a project", "make this a project", or simila
 2. Update the original task in `Tasks/` to reference the new project via `resource_refs`. Keep the task as the current next action, or replace it with a more specific next action within the project.
 3. Update `Projects/README.md` to include the new project.
 
+## Task Output
+
+Tasks are for tracking, not storage. Where output lives depends on size:
+
+- **Small output** (a decision, short analysis, quick notes) → write it in the task file under `## Output`. When the task is done, extract to `Knowledge/` or `Projects/` if worth keeping permanently.
+- **Large deliverables** (specs, presentations, A3s, research docs) → create directly in `Projects/` or `Knowledge/` from the start. The task references the output via `resource_refs:`.
+- **When a task outgrows itself** — multiple steps producing multiple files — promote it to a project.
+
+### Archiving
+Completed tasks go to `Tasks/Archive/`, not deleted.
+
 ## Task Template
 
 ```yaml
@@ -76,6 +87,9 @@ Tie to goals and reference material.
 ## Next Actions
 - [ ] Step one
 - [ ] Step two
+
+## Output
+[Short outputs live here. For larger deliverables, reference them in resource_refs instead.]
 
 ## Progress Log
 - YYYY-MM-DD: Notes, blockers, decisions.

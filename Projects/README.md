@@ -11,6 +11,8 @@ Active and recent project work. Each folder contains PM artifacts (analysis, spe
 | JIRA Config | `jira-config/` | Foundational: execution tooling | Docs mature. Rollout ongoing. | Config guide, bug mgmt, user handbook, presentation |
 
 | Taking PM Ownership | `taking-pm-ownership/` | Personal Dev Goal 1 + foundational | Scoping — key questions defined | README only so far |
+| Empowered Product Teams | `empowered-product-teams/` | Shift LB IT towards product teams | Not started | README, task list |
+| Personal OS — GTD + Inbox | `personal-os-gtd/` | Redesign task mgmt with GTD principles | Not started | README, task list |
 
 ## Proposal
 
